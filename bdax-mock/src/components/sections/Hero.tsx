@@ -1,7 +1,22 @@
+'use client';
+
 import { heroContent } from '@/data/content';
 import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 
 export function Hero() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      setIsVisible(scrolled < 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="container mx-auto px-6 py-6 md:py-12">
       <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -85,6 +100,16 @@ export function Hero() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator with fade animation */}
+      <div className={`flex justify-center mt-6 md:mt-8 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="flex flex-col items-center gap-2 animate-bounce">
+          <div className="text-sm text-gray-600 font-normal">Scroll</div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gray-600">
+            <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </div>
     </section>

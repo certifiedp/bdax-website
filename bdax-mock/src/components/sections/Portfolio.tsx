@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { portfolioContent } from '@/data/content';
 import { Card } from '@/components/ui/card';
 
@@ -29,8 +30,18 @@ export function Portfolio() {
           {portfolioContent.cards.map((card) => (
             <Card
               key={card.id}
-              className="aspect-[4/5] bg-gray-300 rounded-2xl border-0 shadow-sm"
-            />
+              className="aspect-[4/5] bg-gray-300 rounded-2xl border-0 shadow-sm overflow-hidden relative"
+            >
+              {card.image ? (
+                <Image
+                  src={card.image}
+                  alt={card.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              ) : null}
+            </Card>
           ))}
         </div>
 

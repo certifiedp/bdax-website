@@ -29,7 +29,7 @@ export function Header() {
           </nav>
 
           {/* CTA Button */}
-          <Button className="bg-gray-700 hover:bg-gray-800 rounded-full px-8 py-2">Apply</Button>
+          <Button className="bg-black hover:bg-gray-900 rounded-full px-8 py-2">Apply</Button>
         </div>
       </div>
     </header>
