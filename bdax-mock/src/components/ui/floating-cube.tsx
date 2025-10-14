@@ -3,11 +3,11 @@
 import React from 'react';
 
 type FloatingCubeProps = {
-  className?: string; // position + size + animation classes
-  perspective?: number; // px
-  rotation?: string; // CSS transform rotate string
-  depth?: number; // translateZ depth in px
-  animationDelay?: string; // e.g. '0.5s'
+  className?: string;
+  perspective?: number;
+  rotation?: string;
+  depth?: number;
+  animationDelay?: string;
 };
 
 export function FloatingCube({
@@ -26,7 +26,7 @@ export function FloatingCube({
         className="relative w-full h-full"
         style={{ transformStyle: 'preserve-3d', transform: rotation }}
       >
-        {/* Top face - bright white with gentle vignette */}
+        {/* Top face */}
         <div
           className="absolute inset-0"
           style={{
@@ -35,7 +35,7 @@ export function FloatingCube({
 
           }}
         />
-        {/* Bottom face (not visible but keeps structure) */}
+        {/* Bottom face */}
         <div
           className="absolute inset-0"
           style={{
@@ -43,7 +43,7 @@ export function FloatingCube({
             background: 'linear-gradient(140deg, #c7cdd6 0%, #b3bcc8 100%)',
           }}
         />
-        {/* Front face - lighter */}
+        {/* Front face */}
         <div
           className="absolute inset-0"
           style={{
@@ -59,7 +59,7 @@ export function FloatingCube({
             background: 'linear-gradient(180deg, #cbd3de 0%, #b6c0cc 100%)',
           }}
         />
-        {/* Left face - medium grey */}
+        {/* Left face */}
         <div
           className="absolute inset-0"
           style={{
@@ -67,7 +67,7 @@ export function FloatingCube({
             background: 'linear-gradient(90deg, #dfe5ee 0%, #c9d2de 100%)',
           }}
         />
-        {/* Right face - slightly darker for depth */}
+        {/* Right face */}
         <div
           className="absolute inset-0"
           style={{
@@ -76,7 +76,7 @@ export function FloatingCube({
           }}
         />
 
-        {/* Edge highlights to mimic soft bevel */}
+        {/* Edge highlights */}
         <div className="absolute inset-0 pointer-events-none" style={{ transform: `rotateY(90deg) translateZ(${depth}px)` }}>
           <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/30 blur-[1px]" />
         </div>
