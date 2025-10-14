@@ -21,20 +21,26 @@ export function FounderResources() {
 
           {/* Center 3D Graphic */}
           <div className="flex justify-center">
-            <div className="relative w-full max-w-xs aspect-square">
-              {/* Placeholder for 3D graphic */}
+            <div className="relative w-full max-w-sm aspect-[3/4]">
+              {/* Main dark card */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  {/* Stack of shapes */}
-                  <div className="w-40 h-56 bg-gray-900 rounded-lg shadow-2xl">
-                    <div className="absolute inset-4 border border-white/20" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-12 h-12 border-2 border-white/40 rotate-45" />
+                <div className="relative w-72 h-96">
+                  {/* Dark phone/card shape */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-950 to-black rounded-3xl shadow-2xl">
+                    {/* Inner border */}
+                    <div className="absolute inset-6 border border-gray-700/50 rounded-2xl" />
+                    
+                    {/* Centered diamond */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-24 h-24 border-2 border-gray-600/60 rotate-45" />
                     </div>
                   </div>
-                  {/* Floating geometric shapes */}
-                  <div className="absolute -top-8 -left-8 w-16 h-16 bg-gray-300 rounded transform rotate-12 shadow-lg" />
-                  <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-gray-400 rounded-lg transform -rotate-12 shadow-lg" />
+                  
+                  {/* Top-left floating square */}
+                  <div className="absolute -top-12 -left-12 w-28 h-28 bg-gradient-to-br from-gray-300 via-gray-400 to-gray-300 rounded-2xl shadow-xl transform -rotate-12 opacity-90" />
+                  
+                  {/* Bottom-right floating square */}
+                  <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-gradient-to-br from-gray-500 via-gray-600 to-gray-500 rounded-2xl shadow-2xl transform rotate-6 opacity-85" />
                 </div>
               </div>
             </div>

@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { navigationLinks } from '@/data/content';
 import { Button } from '@/components/ui/button';
-import { Logo } from '@/components/ui/logo';
 import { designConfig } from '@/lib/config';
 
 export function Header() {
@@ -10,9 +9,8 @@ export function Header() {
       <div className={`${designConfig.spacing.container} py-4`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="text-xl font-bold tracking-tight">BDAX</div>
-            <Logo size={20} className="mt-0.5 text-yellow-400" />
+          <Link href="/" className="flex items-center">
+            <div className="text-2xl font-black tracking-tight">BDAX</div>
           </Link>
 
           {/* Navigation */}

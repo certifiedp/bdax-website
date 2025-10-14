@@ -33,9 +33,9 @@ export const portfolioContent = {
   visitLink: { label: 'Visit', href: '#portfolio' },
   description: 'See our Portfolio page for all 110 teams of 7 cohorts',
   cards: [
-    { id: 1, image: '/portfolio/project-1.jpg', alt: 'Project 1' },
-    { id: 2, image: '/portfolio/project-2.jpg', alt: 'Project 2' },
-    { id: 3, image: '/portfolio/project-3.jpg', alt: 'Project 3' },
+    { id: 1, image: '/portfolio/project-1.png', alt: 'Project 1' },
+    { id: 2, image: '/portfolio/project-2.png', alt: 'Project 2' },
+    { id: 3, image: '/portfolio/project-3.png', alt: 'Project 3' },
   ],
   companyLogos: [
     { name: 'SUPRA', id: 1 },

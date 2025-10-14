@@ -9,7 +9,7 @@ interface ScrollIndicatorProps {
 
 export function ScrollIndicator({ isVisible, text = 'Scroll' }: ScrollIndicatorProps) {
   return (
-    <div className={`flex justify-center mt-6 md:mt-8 ${designConfig.animation.fadeIn} ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+    <div className={`flex justify-center mt-2 md:mt-4 ${designConfig.animation.fadeIn} ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
       <div className={`flex flex-col items-center gap-2 ${designConfig.animation.bounce}`}>
         <div className={`${designConfig.typography.body.sm} ${designConfig.colors.text.secondary} font-normal`}>
           {text}
