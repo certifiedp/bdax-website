@@ -28,9 +28,9 @@ export function FounderResources() {
                     </div>
                   </div>
 
-                  <FloatingCube className="absolute -top-12 -left-10 w-24 h-24 animate-[float_4s_ease-in-out_infinite]" perspective={800} rotation="rotateX(-20deg) rotateY(-25deg)" depth={18} />
+                  <FloatingCube className="absolute -top-10 -left-10 w-14 h-14 animate-[float_4s_ease-in-out_infinite]" perspective={700} rotation="rotateX(-18deg) rotateY(-22deg)" depth={12} />
 
-                  <FloatingCube className="absolute top-24 -right-14 w-28 h-28 animate-[float_3.5s_ease-in-out_infinite]" perspective={900} rotation="rotateX(-18deg) rotateY(22deg)" depth={20} animationDelay="0.5s" />
+                  <FloatingCube className="absolute top-20 -right-12 w-16 h-16 animate-[float_3.5s_ease-in-out_infinite]" perspective={750} rotation="rotateX(-16deg) rotateY(18deg)" depth={14} animationDelay="0.4s" />
 
                   {/* removed phased white lines */}
                 </div>

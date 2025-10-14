@@ -2,233 +2,195 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { RoundedBox } from '@react-three/drei';
+import { RoundedBox, Bounds } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Floating cube component
-function FloatingCube({ position, size, rotationSpeed }: { position: [number, number, number], size: number, rotationSpeed: number }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
+/** Small white tile hovering above the pillar top */
+function FloatingTile({
+  position,
+  size = 0.7,
+  bob = 0.18,            // ↓ slightly smaller bob so it stays well inside the frame
+  speed = 0.9,
+}: {
+  position: [number, number, number];
+  size?: number;
+  bob?: number;
+  speed?: number;
+}) {
+  const meshRef = useRef<THREE.Mesh>(null!);
   useFrame((state) => {
-    if (meshRef.current) {
-      // Floating animation
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * rotationSpeed) * 0.25;
-      // Slow rotation
-      meshRef.current.rotation.x += 0.004;
-      meshRef.current.rotation.y += 0.006;
-    }
+    const t = state.clock.elapsedTime;
+    meshRef.current.position.y = position[1] + Math.sin(t * speed) * bob;
+    meshRef.current.rotation.x = 0.2 + t * 0.25;
+    meshRef.current.rotation.y = 0.35 + t * 0.35;
   });
-
   return (
     <mesh ref={meshRef} position={position}>
-      <boxGeometry args={[size, size, size]} />
-      <meshPhysicalMaterial 
+      {/* very thin box so it reads like a tile */}
+      <boxGeometry args={[size, size * 0.08, size]} />
+      <meshPhysicalMaterial
         color="#ffffff"
-        metalness={0.0}
-        roughness={0.25}
-        reflectivity={0.6}
-        clearcoat={0.5}
+        roughness={0.2}
+        metalness={0}
+        clearcoat={0.6}
         clearcoatRoughness={0.2}
-        emissive="#ffffff"
-        emissiveIntensity={0.08}
       />
     </mesh>
   );
 }
 
-// Thin square wireframe frame that floats around the pillar
-function SquareFrame({ y, size, phase = 0 }: { y: number; size: number; phase?: number }) {
-  const matRef = useRef<THREE.MeshStandardMaterial>(null);
-  const geometry = useMemo(() => {
-    const lineThickness = Math.max(0.06, size * 0.055);
-    const outer = size;
-    const inner = size - lineThickness;
-    const radius = Math.min(0.28, size * 0.14);
+/** Ultra-thin square ring (used for concentric top squares) */
+function SquareRing({
+  outer,
+  thickness,
+  y = 0,
+}: {
+  outer: number;
+  thickness: number;
+  y?: number;
+}) {
+  const geom = useMemo(() => {
+    const inner = Math.max(outer - thickness, 0.0001);
     const shape = new THREE.Shape();
-    // Outer rounded rect
-    const hw = outer / 2, hh = outer / 2;
-    shape.absarc(-hw + radius, -hh + radius, radius, Math.PI, Math.PI * 1.5);
-    shape.absarc(hw - radius, -hh + radius, radius, Math.PI * 1.5, Math.PI * 2);
-    shape.absarc(hw - radius, hh - radius, radius, 0, Math.PI * 0.5);
-    shape.absarc(-hw + radius, hh - radius, radius, Math.PI * 0.5, Math.PI);
-    // Inner hole
+    const h = outer / 2;
+    shape.moveTo(-h, -h);
+    shape.lineTo(h, -h);
+    shape.lineTo(h, h);
+    shape.lineTo(-h, h);
+    shape.lineTo(-h, -h);
+
     const hole = new THREE.Path();
-    const hiw = inner / 2, hih = inner / 2;
-    hole.absarc(-hiw + radius * 0.85, -hih + radius * 0.85, radius * 0.85, Math.PI, Math.PI * 1.5);
-    hole.absarc(hiw - radius * 0.85, -hih + radius * 0.85, radius * 0.85, Math.PI * 1.5, Math.PI * 2);
-    hole.absarc(hiw - radius * 0.85, hih - radius * 0.85, radius * 0.85, 0, Math.PI * 0.5);
-    hole.absarc(-hiw + radius * 0.85, hih - radius * 0.85, radius * 0.85, Math.PI * 0.5, Math.PI);
+    const hi = inner / 2;
+    hole.moveTo(-hi, -hi);
+    hole.lineTo(hi, -hi);
+    hole.lineTo(hi, hi);
+    hole.lineTo(-hi, hi);
+    hole.lineTo(-hi, -hi);
     shape.holes.push(hole);
-    const extrude = new THREE.ExtrudeGeometry(shape, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.003, bevelSize: 0.003, bevelSegments: 1 });
-    extrude.rotateX(-Math.PI / 2);
-    return extrude;
+
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.003, // extremely thin
+      bevelEnabled: false,
+    });
+    g.rotateX(-Math.PI / 2); // lay flat on top face
+    return g;
+  }, [outer, thickness]);
+
+  return (
+    <mesh position={[0, y, 0]} geometry={geom}>
+      <meshBasicMaterial
+        color="#ffffff"
+        transparent
+        opacity={1}
+        polygonOffset
+        polygonOffsetFactor={-2}
+        polygonOffsetUnits={-2}
+      />
+    </mesh>
+  );
+}
+
+/** Lightweight floating frames around the pillar */
+function FloatingFrame({ y, size }: { y: number; size: number }) {
+  const geom = useMemo(() => {
+    const t = Math.max(0.035, size * 0.035); // thin
+    const shape = new THREE.Shape();
+    const h = size / 2;
+    shape.moveTo(-h, -h);
+    shape.lineTo(h, -h);
+    shape.lineTo(h, h);
+    shape.lineTo(-h, h);
+    shape.lineTo(-h, -h);
+
+    const hole = new THREE.Path();
+    const hi = h - t;
+    hole.moveTo(-hi, -hi);
+    hole.lineTo(hi, -hi);
+    hole.lineTo(hi, hi);
+    hole.lineTo(-hi, hi);
+    hole.lineTo(-hi, -hi);
+    shape.holes.push(hole);
+
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.02,
+      bevelEnabled: false,
+    });
+    g.rotateX(-Math.PI / 2);
+    return g;
   }, [size]);
-  useFrame((state) => {
-    if (matRef.current) {
-      const t = state.clock.elapsedTime + phase;
-      matRef.current.emissiveIntensity = 0.6 + Math.sin(t * 1.2) * 0.25;
-    }
-  });
+
   return (
-    <mesh geometry={geometry} position={[0, y, 0]}>
-      <meshStandardMaterial ref={matRef} color="#ffffff" emissive="#ffffff" emissiveIntensity={0.75} roughness={0.15} metalness={0.0} />
+    <mesh geometry={geom} position={[0, y, 0]}>
+      <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
     </mesh>
   );
 }
 
-// Thin glowing band that wraps the pillar like a separator
-function SeparatorBand({ y, width, depth, thickness = 0.05, phase = 0 }: { y: number; width: number; depth: number; thickness?: number; phase?: number }) {
-  const matRef = useRef<THREE.MeshStandardMaterial>(null);
-  const geometry = useMemo(() => {
-    const outerW = width + 0.26;
-    const outerD = depth + 0.26;
-    const innerW = width + 0.02;
-    const innerD = depth + 0.02;
-    const shape = new THREE.Shape();
-    shape.moveTo(-outerW / 2, -outerD / 2);
-    shape.lineTo(outerW / 2, -outerD / 2);
-    shape.lineTo(outerW / 2, outerD / 2);
-    shape.lineTo(-outerW / 2, outerD / 2);
-    shape.lineTo(-outerW / 2, -outerD / 2);
-    const hole = new THREE.Path();
-    hole.moveTo(-innerW / 2, -innerD / 2);
-    hole.lineTo(innerW / 2, -innerD / 2);
-    hole.lineTo(innerW / 2, innerD / 2);
-    hole.lineTo(-innerW / 2, innerD / 2);
-    hole.lineTo(-innerW / 2, -innerD / 2);
-    shape.holes.push(hole);
-    const extrude = new THREE.ExtrudeGeometry(shape, { depth: thickness, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.01, steps: 1, bevelSegments: 1 });
-    extrude.rotateX(-Math.PI / 2);
-    return extrude;
-  }, [width, depth, thickness]);
-  useFrame((state) => {
-    if (matRef.current) {
-      const t = state.clock.elapsedTime + phase;
-      matRef.current.emissiveIntensity = 0.55 + Math.sin(t * 1.4) * 0.18;
-      matRef.current.opacity = 0.9 - Math.abs(Math.sin(t * 1.4)) * 0.08;
-    }
-  });
-  return (
-    <mesh geometry={geometry} position={[0, y, 0]}>
-      <meshStandardMaterial ref={matRef} color="#ffffff" emissive="#ffffff" emissiveIntensity={0.55} transparent opacity={0.9} depthWrite={false} />
-    </mesh>
-  );
-}
-
-// Top block with concentric squares
-function TopPillarBlock({ pillarSize, height }: { pillarSize: number; height: number }) {
-  const groupRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      // Subtle pulsing animation for concentric squares
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 0.5) * 0.02;
-      groupRef.current.children.forEach((child, i) => {
-        if (i > 0 && i < 4) { // Only the concentric squares
-          (child as THREE.Mesh).scale.setScalar(scale);
-        }
-      });
-    }
-  });
+function PillarGroup() {
+  // Dimensions tuned to the reference
+  const pillarSize = 3.0;
+  const pillarHeight = 7.0;
 
   return (
-    <group ref={groupRef} position={[0, height / 2 + 0.06, 0]}>
-      {/* Concentric squares on top (aligned with pillar edges) */}
-      {[
-        pillarSize * 0.48,
-        pillarSize * 0.34,
-        pillarSize * 0.20,
-      ].map((outer, i) => (
-        <mesh key={i} position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 4]}>
-          <ringGeometry args={[outer - pillarSize * 0.05, outer, 4]} />
-          <meshBasicMaterial 
-            color="#ffffff"
-            transparent
-            opacity={1}
-            polygonOffset
-            polygonOffsetFactor={-1}
-            polygonOffsetUnits={-1}
-          />
-        </mesh>
-      ))}
+    <group position={[0, 0, 0]}>
+      {/* Pillar */}
+      <RoundedBox args={[pillarSize, pillarHeight, pillarSize]} radius={0.16} smoothness={6}>
+        <meshPhysicalMaterial
+          color="#0b0e12"         // darker, matte
+          roughness={0.85}
+          metalness={0.1}
+          clearcoat={0.25}
+          clearcoatRoughness={0.7}
+        />
+      </RoundedBox>
 
-      {/* Central light */}
-      <pointLight position={[0, 0.1, 0]} intensity={1.5} distance={2.5} color="#ffffff" />
-      <mesh position={[0, 0.02, 0]}>
-        <sphereGeometry args={[0.1, 16, 16]} />
-        <meshBasicMaterial color="#ffffff" />
-      </mesh>
+      {/* Hard edge hint (very subtle) */}
+      <lineSegments>
+        <edgesGeometry args={[new THREE.BoxGeometry(pillarSize, pillarHeight, pillarSize)]} />
+        <lineBasicMaterial color="#161b21" transparent opacity={0.55} />
+      </lineSegments>
+
+      {/* Concentric white squares on the top face (flat, centered) */}
+      <group position={[0, pillarHeight / 2 + 0.0015, 0]}>
+        <SquareRing outer={pillarSize * 0.78} thickness={pillarSize * 0.06} />
+        <SquareRing outer={pillarSize * 0.56} thickness={pillarSize * 0.06} />
+        <SquareRing outer={pillarSize * 0.36} thickness={pillarSize * 0.06} />
+        <SquareRing outer={pillarSize * 0.18} thickness={pillarSize * 0.06} />
+      </group>
+
+      {/* Floating wire frames (thin, non-glowing) */}
+      <FloatingFrame y={pillarHeight / 2 - 1.4} size={pillarSize * 1.34} />
+      <FloatingFrame y={pillarHeight / 2 - 2.9} size={pillarSize * 1.62} />
+      <FloatingFrame y={pillarHeight / 2 - 4.5} size={pillarSize * 1.90} />
+
+      {/* Small white tile hovering above the top */}
+      <FloatingTile position={[0.2, pillarHeight / 2 + 1.05, 0.1]} />
     </group>
   );
 }
 
-// Main scene component
 function Scene() {
-  // Pillar dimensions
-  const pillarSize = 3.2; // width/depth
-  const pillarHeight = 10; // total height
-  const scaleFactor = 0.75; // overall scene scale
   return (
     <>
-      {/* Lighting */}
-      {/* Lighting tuned for one bright side and one dark side */}
-      <ambientLight intensity={0.35} />
-      {/* Key light from front-left */}
+      {/* Lighting: one key + subtle ambient + tiny top lift */}
+      <ambientLight intensity={0.25} />
       <directionalLight position={[6, 8, 6]} intensity={1.0} color="#ffffff" />
-      {/* Cool fill from back-right to lift shadows slightly */}
-      <directionalLight position={[-6, 3, -6]} intensity={0.35} color="#9fc6ff" />
-      {/* Weak top light to brighten rings and top face */}
-      <directionalLight position={[0, 10, 0]} intensity={0.4} color="#ffffff" />
+      <directionalLight position={[0, 10, 0]} intensity={0.25} color="#ffffff" />
 
-      <group scale={[scaleFactor, scaleFactor, scaleFactor]}>
-        {/* Floating light cube */}
-        <FloatingCube position={[0.6, pillarHeight / 2 + 2.4, 0.4]} size={0.8} rotationSpeed={0.95} />
-
-        {/* Pillar - single tall rounded box */}
-      <group position={[0, 0, 0]}>
-        <RoundedBox args={[pillarSize, pillarHeight, pillarSize]} radius={0.18} smoothness={6}>
-          <meshPhysicalMaterial 
-            color="#0c0f12"
-            metalness={0.2}
-            roughness={0.9}
-            reflectivity={0.2}
-            clearcoat={0.3}
-            clearcoatRoughness={0.7}
-          />
-        </RoundedBox>
-        {/* Hard edge highlights to define sides */}
-        <lineSegments>
-          <edgesGeometry args={[new THREE.BoxGeometry(pillarSize, pillarHeight, pillarSize)]} />
-          <lineBasicMaterial color="#1a1f25" linewidth={2} transparent opacity={0.6} />
-        </lineSegments>
-      </group>
-
-        {/* Concentric squares on top */}
-        <TopPillarBlock pillarSize={pillarSize} height={pillarHeight} />
-
-        {/* Wireframe square frames around pillar */}
-        <SquareFrame y={pillarHeight / 2 - 2.0} size={pillarSize * 1.35} phase={0} />
-        <SquareFrame y={pillarHeight / 2 - 4.3} size={pillarSize * 1.75} phase={0.6} />
-        <SquareFrame y={pillarHeight / 2 - 6.9} size={pillarSize * 2.15} phase={1.2} />
-
-        {/* Separator glowing bands around the pillar (thin white lines) */}
-        <SeparatorBand y={pillarHeight / 2 - 2.05} width={pillarSize} depth={pillarSize} phase={0} />
-        <SeparatorBand y={pillarHeight / 2 - 4.35} width={pillarSize} depth={pillarSize} phase={0.6} />
-        <SeparatorBand y={pillarHeight / 2 - 6.95} width={pillarSize} depth={pillarSize} phase={1.2} />
-
-      {/* No shadow plane to ensure zero real-time shadows */}
-      </group>
+      {/* Auto-fit the whole pillar + tile into the camera frustum */}
+      <Bounds fit clip observe margin={1.25}>
+        <PillarGroup />
+      </Bounds>
     </>
   );
 }
 
-// Main export component
 export function Pillar3D() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full" style={{ overflow: 'visible' }}>
       <Canvas
-        camera={{ position: [7, 7, 9], fov: 40 }}
-        shadows
+        dpr={[1, 2]}
+        camera={{ position: [7.2, 7.4, 8.0], fov: 38, near: 0.01, far: 500 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
@@ -237,4 +199,3 @@ export function Pillar3D() {
     </div>
   );
 }
-
