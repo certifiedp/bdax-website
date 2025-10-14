@@ -1,11 +1,12 @@
 import { founderResourcesContent } from '@/data/content';
+import { designConfig } from '@/lib/config';
 
 export function FounderResources() {
   return (
-    <section className="bg-white py-12 md:py-16">
-      <div className="container mx-auto px-6">
+    <section className={`${designConfig.colors.background.white} ${designConfig.spacing.section.sm}`}>
+      <div className={designConfig.spacing.container}>
         {/* Title */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-center mb-16">
+        <h2 className={`${designConfig.typography.heading.lg} text-center mb-16`}>
           {founderResourcesContent.title}
         </h2>
 
@@ -13,7 +14,7 @@ export function FounderResources() {
         <div className="grid md:grid-cols-3 gap-10 md:gap-12 items-center">
           {/* Left Text */}
           <div className="text-center md:text-right">
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>
               {founderResourcesContent.sections[0].text}
             </p>
           </div>
@@ -41,7 +42,7 @@ export function FounderResources() {
 
           {/* Right Text */}
           <div className="text-center md:text-left">
-            <p className="text-base text-gray-600 leading-relaxed">
+            <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>
               {founderResourcesContent.sections[1].text}
             </p>
           </div>

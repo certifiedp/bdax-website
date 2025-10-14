@@ -4,10 +4,11 @@ import { Hero } from '@/components/sections/Hero';
 import { Cohort } from '@/components/sections/Cohort';
 import { Portfolio } from '@/components/sections/Portfolio';
 import { FounderResources } from '@/components/sections/FounderResources';
+import { designConfig } from '@/lib/config';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#d4d4d8]">
+    <div className={`min-h-screen ${designConfig.colors.background.main}`}>
       <Header />
       <Banner />
       <Hero />

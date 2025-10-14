@@ -2,6 +2,8 @@
 
 import { heroContent } from '@/data/content';
 import { Button } from '@/components/ui/button';
+import { ScrollIndicator } from '@/components/ui/scroll-indicator';
+import { designConfig, scrollConfig } from '@/lib/config';
 import { useState, useEffect } from 'react';
 
 export function Hero() {
@@ -10,7 +12,7 @@ export function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY;
-      setIsVisible(scrolled < 50);
+      setIsVisible(scrolled < scrollConfig.arrowFadeThreshold);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -18,21 +20,26 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="container mx-auto px-6 py-6 md:py-12">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
+    <section className={`${designConfig.spacing.container} py-6 md:py-12`}>
+      <div className={`grid md:grid-cols-2 ${designConfig.spacing.gap.lg} items-center`}>
         {/* Left Content */}
         <div className="space-y-5">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-normal leading-tight tracking-tight">
+          <h1 className={designConfig.typography.heading.xl}>
             {heroContent.title}
           </h1>
-          <p className="text-gray-600 text-base max-w-md leading-relaxed">
+          <p className={`${designConfig.colors.text.secondary} ${designConfig.typography.body.base} max-w-md`}>
             {heroContent.description}
           </p>
-          <div className="flex flex-wrap gap-4 pt-1">
-            <Button variant="outline" className="gap-2 rounded-full px-8 py-6 border-2 border-gray-300 text- bg-white hover:bg-gray-50 text-base">
+          <div className={`flex flex-wrap ${designConfig.spacing.gap.sm} pt-1`}>
+            <Button 
+              variant="outline" 
+              className={`gap-2 ${designConfig.border.radius.full} px-8 py-6 border-2 border-gray-300 ${designConfig.colors.text.tertiary} ${designConfig.colors.background.white} hover:bg-gray-50 ${designConfig.typography.body.base}`}
+            >
               {heroContent.primaryCta.label} →
             </Button>
-            <Button className="bg-black hover:bg-gray-900 gap-2 rounded-full px-8 py-6 text-base">
+            <Button 
+              className={`${designConfig.colors.background.black} hover:bg-gray-900 gap-2 ${designConfig.border.radius.full} px-8 py-6 ${designConfig.typography.body.base}`}
+            >
               {heroContent.secondaryCta.label} →
             </Button>
           </div>
@@ -103,15 +110,7 @@ export function Hero() {
         </div>
       </div>
       
-      {/* Scroll Indicator with fade animation */}
-      <div className={`flex justify-center mt-6 md:mt-8 transition-opacity duration-500 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <div className="flex flex-col items-center gap-2 animate-bounce">
-          <div className="text-sm text-gray-600 font-normal">Scroll</div>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gray-600">
-            <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-      </div>
+      <ScrollIndicator isVisible={isVisible} />
     </section>
   );
 }
