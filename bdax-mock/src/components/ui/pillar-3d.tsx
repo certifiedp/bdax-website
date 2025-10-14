@@ -185,7 +185,7 @@ function Scene() {
   );
 }
 
-export function Pillar3D() {
+export function Pillar3D({ scale = 0.9 }: { scale?: number }) {
   return (
     <div className="w-full h-full" style={{ overflow: 'visible' }}>
       <Canvas
@@ -194,7 +194,9 @@ export function Pillar3D() {
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
-        <Scene />
+        <group scale={[scale, scale, scale]}>
+          <Scene />
+        </group>
       </Canvas>
     </div>
   );

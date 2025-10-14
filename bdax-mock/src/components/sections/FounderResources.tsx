@@ -24,13 +24,13 @@ export function FounderResources() {
                 <div className="relative w-72 h-96">
                   <div className="absolute inset-0 rounded-3xl overflow-hidden">
                     <div className="absolute inset-0">
-                      <Pillar3D></Pillar3D>
+                      <Pillar3D scale={2} />
                     </div>
                   </div>
 
-                  <FloatingCube className="absolute -top-10 -left-10 w-14 h-14 animate-[float_4s_ease-in-out_infinite]" perspective={700} rotation="rotateX(-18deg) rotateY(-22deg)" depth={12} />
+                  <FloatingCube className="absolute -top-10 -left-10 w-20 h-20 animate-[float_4s_ease-in-out_infinite]" perspective={300} rotation="rotateX(-18deg) rotateY(-22deg)" depth={10} />
 
-                  <FloatingCube className="absolute top-20 -right-12 w-16 h-16 animate-[float_3.5s_ease-in-out_infinite]" perspective={750} rotation="rotateX(-16deg) rotateY(18deg)" depth={14} animationDelay="0.4s" />
+                  <FloatingCube className="absolute top-20 -right-12 w-24 h-24 animate-[float_3.5s_ease-in-out_infinite]" perspective={300} rotation="rotateX(-16deg) rotateY(18deg)" depth={10} animationDelay="0.4s" />
 
                   {/* removed phased white lines */}
                 </div>
