@@ -4,28 +4,28 @@ import { Card } from '@/components/ui/card';
 
 export function Portfolio() {
   return (
-    <section className="bg-gray-100 py-20 md:py-32">
+    <section className="bg-gray-100 py-12 md:py-16">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
-          <h2 className="text-5xl md:text-6xl font-normal">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal">
             {portfolioContent.title}
           </h2>
           <Link
             href={portfolioContent.visitLink.href}
-            className="text-base font-medium hover:opacity-70 transition-opacity flex items-center gap-2"
+            className="text-base font-normal hover:opacity-70 transition-opacity flex items-center gap-2"
           >
             {portfolioContent.visitLink.label} →
           </Link>
         </div>
 
         {/* Description */}
-        <p className="text-base text-gray-700 mb-16">
+        <p className="text-base text-black mb-10">
           {portfolioContent.description}
         </p>
 
         {/* Portfolio Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
           {portfolioContent.cards.map((card) => (
             <Card
               key={card.id}
@@ -34,25 +34,35 @@ export function Portfolio() {
           ))}
         </div>
 
-        {/* Company Logos - Two Rows */}
-        <div className="space-y-6">
-          {[0, 1].map((rowIndex) => (
-            <div
-              key={rowIndex}
-              className="flex flex-wrap justify-center md:justify-start items-center gap-6 md:gap-8"
-            >
-              {portfolioContent.companyLogos
-                .slice(rowIndex * 4, (rowIndex + 1) * 4)
-                .map((company) => (
-                  <div
-                    key={company.id}
-                    className="px-8 py-4 bg-white/80 rounded-lg text-sm font-medium text-gray-700 shadow-sm"
-                  >
-                    {company.name}
-                  </div>
-                ))}
+        {/* Company Logos - Animated Scrolling Rows */}
+        <div className="space-y-5 overflow-hidden">
+          {/* First Row - Scroll Left */}
+          <div className="relative">
+            <div className="flex gap-5 animate-scroll-left">
+              {[...portfolioContent.companyLogos, ...portfolioContent.companyLogos, ...portfolioContent.companyLogos].map((company, index) => (
+                <div
+                  key={`${company.id}-${index}`}
+                  className="flex-shrink-0 px-6 py-3 bg-white/90 rounded-lg text-sm font-normal text-gray-700 shadow-sm"
+                >
+                  {company.name}
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Second Row - Scroll Right */}
+          <div className="relative">
+            <div className="flex gap-5 animate-scroll-right">
+              {[...portfolioContent.companyLogos, ...portfolioContent.companyLogos, ...portfolioContent.companyLogos].map((company, index) => (
+                <div
+                  key={`${company.id}-${index}-reverse`}
+                  className="flex-shrink-0 px-6 py-3 bg-white/90 rounded-lg text-sm font-normal text-gray-700 shadow-sm"
+                >
+                  {company.name}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

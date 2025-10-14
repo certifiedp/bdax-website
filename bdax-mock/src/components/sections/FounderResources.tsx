@@ -2,18 +2,18 @@ import { founderResourcesContent } from '@/data/content';
 
 export function FounderResources() {
   return (
-    <section className="bg-white py-20 md:py-32">
+    <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-6">
         {/* Title */}
-        <h2 className="text-5xl md:text-6xl font-normal text-center mb-24">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-center mb-16">
           {founderResourcesContent.title}
         </h2>
 
         {/* Content Grid */}
-        <div className="grid md:grid-cols-3 gap-12 md:gap-16 items-center">
+        <div className="grid md:grid-cols-3 gap-10 md:gap-12 items-center">
           {/* Left Text */}
           <div className="text-center md:text-right">
-            <p className="text-base text-gray-700 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed">
               {founderResourcesContent.sections[0].text}
             </p>
           </div>
@@ -41,7 +41,7 @@ export function FounderResources() {
 
           {/* Right Text */}
           <div className="text-center md:text-left">
-            <p className="text-base text-gray-700 leading-relaxed">
+            <p className="text-base text-gray-600 leading-relaxed">
               {founderResourcesContent.sections[1].text}
             </p>
           </div>

@@ -144,6 +144,24 @@
     }
   }
   
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-33.33%);
+    }
+  }
+  
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(-33.33%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
   .animate-float {
     animation: float 4s ease-in-out infinite;
   }
@@ -151,5 +169,13 @@
   .animate-float-delay {
     animation: float-delay 5s ease-in-out infinite;
     animation-delay: 1s;
+  }
+  
+  .animate-scroll-left {
+    animation: scroll-left 25s linear infinite;
+  }
+  
+  .animate-scroll-right {
+    animation: scroll-right 25s linear infinite;
   }
 }
