@@ -1,25 +1,24 @@
 export const navigationLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Network', href: '#network' },
-  { label: 'Partners', href: '#partners' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Demo Days', href: '#demo-days' },
+  { label: 'Our companies', href: '#companies' },
+  { label: 'Demo days', href: '#demo-days' },
 ];
 
 export const bannerContent = {
-  text: 'FALL 2025 COHORT NOW OPEN',
+  text: 'Spring 2025 Cohort Applications are OPEN!',
 };
 
 export const heroContent = {
+  tag: 'Introducing BDAX',
   title: 'Berkeley Digital Asset Xcelerator',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore',
-  primaryCta: { label: 'Apply Now', href: '#apply' },
+  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore',
+  primaryCta: { label: 'Apply now', href: '#apply' },
   secondaryCta: { label: 'Learn more', href: '#learn' },
 };
 
 export const cohortContent = {
   title: 'Join our',
-  subtitle: 'Fall 2025 Cohort',
+  subtitle: 'Spring 2025 Cohort.',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
   stats: [
     { value: '85+', label: 'companies accelerated' },
@@ -29,13 +28,14 @@ export const cohortContent = {
 };
 
 export const portfolioContent = {
-  title: 'Our Portfolio',
+  title: 'Our portfolio',
   visitLink: { label: 'Visit', href: '#portfolio' },
-  description: 'See our Portfolio page for all 110 teams of 7 cohorts',
+  description: 'See Our Companies page for all 110 teams of 7 cohorts.',
   cards: [
-    { id: 1, image: '/portfolio/project-1.png', alt: 'Project 1' },
-    { id: 2, image: '/portfolio/project-2.png', alt: 'Project 2' },
-    { id: 3, image: '/portfolio/project-3.png', alt: 'Project 3' },
+    { id: 1, image: '/assets/portfolio/Rectangle 199.png', alt: 'Abstract Desert Landscape' },
+    { id: 2, image: '/assets/portfolio/Rectangle 200.png', alt: 'Digital Identity Concept' },
+    { id: 3, image: '/assets/portfolio/Rectangle 202.png', alt: 'Cosmic Black Hole' },
+    { id: 4, image: '/assets/portfolio/Rectangle 203.png', alt: 'Futuristic Architecture' },
   ],
   companyLogos: [
     { name: 'SUPRA', id: 1 },
@@ -51,15 +51,73 @@ export const portfolioContent = {
 
 export const founderResourcesContent = {
   title: 'Founder Resources',
-  sections: [
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-      position: 'left',
-    },
-    {
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-      position: 'right',
-    },
+  tabs: [
+    { id: 'talent', label: 'Talent pipeline' },
+    { id: 'audience', label: 'Global blockchain audience' },
+    { id: 'focus', label: 'Focus week' },
+    { id: 'network', label: 'Network' },
+    { id: 'fellows', label: 'Fellow program' },
   ],
+  content: {
+    talent: {
+      title: 'Talent pipeline and recruitment platforms',
+      description: 'Exposure to audience of 20,000+ through our newsletter, website, social media, and other marketing channels.',
+      image: '/assets/founder-resources/office.png',
+    },
+    audience: {
+      title: 'Global blockchain audience',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
+      image: '/assets/founder-resources/office.png',
+    },
+    focus: {
+      title: 'Focus week',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
+      image: '/assets/founder-resources/office.png',
+    },
+    network: {
+      title: 'Network',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
+      image: '/assets/founder-resources/office.png',
+    },
+    fellows: {
+      title: 'Fellow program',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
+      image: '/assets/founder-resources/office.png',
+    },
+  },
+};
+
+export const footerContent = {
+  logo: 'BDAX',
+  tagline: 'UC Berkeley',
+  navigation: {
+    bdax: {
+      title: 'BDAX',
+      links: [
+        { label: 'About', href: '#about' },
+        { label: 'Our companies', href: '#companies' },
+        { label: 'Demo days', href: '#demo-days' },
+      ],
+    },
+    contact: {
+      title: 'Contact',
+      links: [
+        { label: 'Email', href: 'mailto:contact@bdax.berkeley.edu' },
+        { label: 'Linkedin', href: '#linkedin' },
+      ],
+    },
+  },
+  social: [
+    { name: 'LinkedIn', icon: 'linkedin', href: '#' },
+    { name: 'Twitter', icon: 'twitter', href: '#' },
+    { name: 'Instagram', icon: 'instagram', href: '#' },
+  ],
+  cta: {
+    label: 'Apply now',
+    href: '#apply',
+  },
+  backToTop: 'Back to top',
+  copyright: '© 2025\nUC Berkeley',
+  stayConnected: 'Stay connected:',
 };
 

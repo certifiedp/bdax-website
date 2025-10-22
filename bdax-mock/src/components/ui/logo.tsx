@@ -1,15 +1,28 @@
-import { designConfig } from '@/lib/config';
+import Image from 'next/image';
 
 interface LogoProps {
   className?: string;
   size?: number;
+  showText?: boolean;
 }
 
-export function Logo({ className = '', size = 20 }: LogoProps) {
+export function Logo({ className = '', size = 40, showText = true }: LogoProps) {
   return (
-    <svg width={size} height={size} viewBox="0 0 20 20" className={className}>
-      <path d="M10 0 L0 20 L20 20 Z" fill="currentColor" />
-    </svg>
+    <div className={`flex items-center gap-3 ${className}`}>
+      <Image
+        src="/assets/bdaxLogo.png"
+        alt="BDAX Logo"
+        width={size}
+        height={size * 1.5}
+        className="object-contain"
+        priority
+      />
+      {showText && (
+        <span className="text-white text-xl font-medium tracking-tight">
+          BDAX
+        </span>
+      )}
+    </div>
   );
 }
 

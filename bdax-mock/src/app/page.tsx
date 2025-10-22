@@ -1,4 +1,5 @@
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import { Banner } from '@/components/sections/Banner';
 import { Hero } from '@/components/sections/Hero';
 import { Cohort } from '@/components/sections/Cohort';
@@ -15,6 +16,7 @@ export default function Home() {
       <Cohort />
       <Portfolio />
       <FounderResources />
+      <Footer />
     </div>
   );
 }

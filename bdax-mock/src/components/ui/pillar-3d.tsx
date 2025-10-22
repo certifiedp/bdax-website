@@ -2,15 +2,15 @@
 
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { RoundedBox, Bounds } from '@react-three/drei';
+import { RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 
-/** Small white tile hovering above the pillar top */
-function FloatingTile({
+/** Golden polyhedron/gem hovering above the pillar top */
+function FloatingGem({
   position,
-  size = 0.7,
-  bob = 0.18,            // ↓ slightly smaller bob so it stays well inside the frame
-  speed = 0.9,
+  size = 1.0,
+  bob = 0.2,
+  speed = 0.7,
 }: {
   position: [number, number, number];
   size?: number;
@@ -18,28 +18,68 @@ function FloatingTile({
   speed?: number;
 }) {
   const meshRef = useRef<THREE.Mesh>(null!);
+  
+  // Create complex polyhedron geometry (octahedron-like gem)
+  const geometry = useMemo(() => {
+    const vertices = new Float32Array([
+      // Top pyramid
+      0, size * 0.8, 0,           // Top point
+      -size * 0.5, 0, -size * 0.5,
+      size * 0.5, 0, -size * 0.5,
+      size * 0.5, 0, size * 0.5,
+      -size * 0.5, 0, size * 0.5,
+      
+      // Bottom pyramid
+      0, -size * 0.6, 0,          // Bottom point
+    ]);
+    
+    const indices = [
+      // Top pyramid faces
+      0, 1, 2,
+      0, 2, 3,
+      0, 3, 4,
+      0, 4, 1,
+      
+      // Bottom pyramid faces
+      5, 2, 1,
+      5, 3, 2,
+      5, 4, 3,
+      5, 1, 4,
+    ];
+    
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    geom.setIndex(indices);
+    geom.computeVertexNormals();
+    return geom;
+  }, [size]);
+  
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     meshRef.current.position.y = position[1] + Math.sin(t * speed) * bob;
-    meshRef.current.rotation.x = 0.2 + t * 0.25;
-    meshRef.current.rotation.y = 0.35 + t * 0.35;
+    meshRef.current.rotation.x = 0.2 + t * 0.15;
+    meshRef.current.rotation.y = 0.3 + t * 0.25;
+    meshRef.current.rotation.z = 0.1 + t * 0.1;
   });
+  
   return (
-    <mesh ref={meshRef} position={position}>
-      {/* very thin box so it reads like a tile */}
-      <boxGeometry args={[size, size * 0.08, size]} />
+    <mesh ref={meshRef} position={position} geometry={geometry}>
       <meshPhysicalMaterial
-        color="#ffffff"
-        roughness={0.2}
-        metalness={0}
-        clearcoat={0.6}
-        clearcoatRoughness={0.2}
+        color="#FDB517"
+        roughness={0.15}
+        metalness={0.9}
+        clearcoat={0.5}
+        clearcoatRoughness={0.05}
+        emissive="#D68A15"
+        emissiveIntensity={0.1}
+        envMapIntensity={1.2}
+        reflectivity={0.9}
       />
     </mesh>
   );
 }
 
-/** Ultra-thin square ring (used for concentric top squares) */
+/** Square ring (used for concentric top patterns - appears as diamond when rotated) */
 function SquareRing({
   outer,
   thickness,
@@ -53,12 +93,15 @@ function SquareRing({
     const inner = Math.max(outer - thickness, 0.0001);
     const shape = new THREE.Shape();
     const h = outer / 2;
+    
+    // Outer square
     shape.moveTo(-h, -h);
     shape.lineTo(h, -h);
     shape.lineTo(h, h);
     shape.lineTo(-h, h);
     shape.lineTo(-h, -h);
 
+    // Inner square (hole)
     const hole = new THREE.Path();
     const hi = inner / 2;
     hole.moveTo(-hi, -hi);
@@ -69,19 +112,19 @@ function SquareRing({
     shape.holes.push(hole);
 
     const g = new THREE.ExtrudeGeometry(shape, {
-      depth: 0.003, // extremely thin
+      depth: 0.003,
       bevelEnabled: false,
     });
-    g.rotateX(-Math.PI / 2); // lay flat on top face
+    g.rotateX(-Math.PI / 2);
     return g;
   }, [outer, thickness]);
 
   return (
     <mesh position={[0, y, 0]} geometry={geom}>
       <meshBasicMaterial
-        color="#ffffff"
+        color="#D68A15"
         transparent
-        opacity={1}
+        opacity={1.0}
         polygonOffset
         polygonOffsetFactor={-2}
         polygonOffsetUnits={-2}
@@ -90,20 +133,25 @@ function SquareRing({
   );
 }
 
-/** Lightweight floating frames around the pillar */
-function FloatingFrame({ y, size }: { y: number; size: number }) {
+/** Lightweight floating square frames around the pillar (aligned with pillar) */
+function FloatingDiamondFrame({ y, size }: { y: number; size: number }) {
   const geom = useMemo(() => {
-    const t = Math.max(0.035, size * 0.035); // thin
+    const t = Math.max(0.04, size * 0.04);
+    const innerSize = size - t;
+    
     const shape = new THREE.Shape();
     const h = size / 2;
+    const hi = innerSize / 2;
+    
+    // Outer square
     shape.moveTo(-h, -h);
     shape.lineTo(h, -h);
     shape.lineTo(h, h);
     shape.lineTo(-h, h);
     shape.lineTo(-h, -h);
 
+    // Inner square (hole)
     const hole = new THREE.Path();
-    const hi = h - t;
     hole.moveTo(-hi, -hi);
     hole.lineTo(hi, -hi);
     hole.lineTo(hi, hi);
@@ -121,50 +169,89 @@ function FloatingFrame({ y, size }: { y: number; size: number }) {
 
   return (
     <mesh geometry={geom} position={[0, y, 0]}>
-      <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
+      <meshBasicMaterial color="#D68A15" transparent opacity={0.65} />
     </mesh>
   );
 }
 
 function PillarGroup() {
-  // Dimensions tuned to the reference
-  const pillarSize = 3.0;
-  const pillarHeight = 7.0;
+  // Dimensions - pillar extends to bottom border
+  const pillarSize = 3.2;
+  const pillarHeight = 9.0; // Increased to reach bottom
+  const radius = 0.15;
 
   return (
-    <group position={[0, 0, 0]}>
-      {/* Pillar */}
-      <RoundedBox args={[pillarSize, pillarHeight, pillarSize]} radius={0.16} smoothness={6}>
+    <group position={[0, -6, 0]}> {/* Positioned to crop bottom */}
+      {/* Main Pillar - ROUNDED with dark purple/maroon to blue gradient */}
+      <RoundedBox args={[pillarSize, pillarHeight, pillarSize]} radius={radius} smoothness={8}>
         <meshPhysicalMaterial
-          color="#0b0e12"         // darker, matte
-          roughness={0.85}
-          metalness={0.1}
-          clearcoat={0.25}
-          clearcoatRoughness={0.7}
+          color="#1a0f1e"  // Very dark purple/maroon base
+          roughness={0.65}
+          metalness={0.25}
+          clearcoat={0.35}
+          clearcoatRoughness={0.55}
         />
       </RoundedBox>
 
-      {/* Hard edge hint (very subtle) */}
+      {/* Blue gradient overlay on right side - matching Figma */}
+      <mesh position={[pillarSize * 0.3, 0, 0]}>
+        <boxGeometry args={[pillarSize * 0.6, pillarHeight - 0.05, pillarSize - 0.05]} />
+        <meshPhysicalMaterial
+          color="#3A5A8C"  // Deeper blue to match Figma
+          transparent
+          opacity={0.7}
+          roughness={0.65}
+          metalness={0.25}
+        />
+      </mesh>
+      
+      {/* Subtle purple tint on left side */}
+      <mesh position={[-pillarSize * 0.15, 0, 0]}>
+        <boxGeometry args={[pillarSize * 0.3, pillarHeight - 0.1, pillarSize - 0.1]} />
+        <meshPhysicalMaterial
+          color="#2D1B3D"  // Purple maroon
+          transparent
+          opacity={0.5}
+          roughness={0.7}
+          metalness={0.2}
+        />
+      </mesh>
+
+      {/* Golden bottom edge/trim */}
+      <mesh position={[0, -pillarHeight / 2 + 0.15, 0]}>
+        <boxGeometry args={[pillarSize + 0.02, 0.3, pillarSize + 0.02]} />
+        <meshPhysicalMaterial
+          color="#D68A15"
+          roughness={0.2}
+          metalness={0.8}
+          emissive="#D68A15"
+          emissiveIntensity={0.2}
+        />
+      </mesh>
+
+      {/* Subtle edge highlights */}
       <lineSegments>
         <edgesGeometry args={[new THREE.BoxGeometry(pillarSize, pillarHeight, pillarSize)]} />
-        <lineBasicMaterial color="#161b21" transparent opacity={0.55} />
+        <lineBasicMaterial color="#5A8BB7" transparent opacity={0.25} />
       </lineSegments>
 
-      {/* Concentric white squares on the top face (flat, centered) */}
-      <group position={[0, pillarHeight / 2 + 0.0015, 0]}>
-        <SquareRing outer={pillarSize * 0.78} thickness={pillarSize * 0.06} />
-        <SquareRing outer={pillarSize * 0.56} thickness={pillarSize * 0.06} />
-        <SquareRing outer={pillarSize * 0.36} thickness={pillarSize * 0.06} />
-        <SquareRing outer={pillarSize * 0.18} thickness={pillarSize * 0.06} />
+      {/* Concentric golden SQUARES on the top face (NO rotation - aligned with pillar) */}
+      <group position={[0, pillarHeight / 2 + 0.002, 0]}>
+        <SquareRing outer={pillarSize * 0.75} thickness={pillarSize * 0.065} />
+        <SquareRing outer={pillarSize * 0.58} thickness={pillarSize * 0.065} />
+        <SquareRing outer={pillarSize * 0.41} thickness={pillarSize * 0.065} />
+        <SquareRing outer={pillarSize * 0.24} thickness={pillarSize * 0.065} />
       </group>
 
-      {/* Floating wire frames (thin, non-glowing) */}
-      <FloatingFrame y={pillarHeight / 2 - 1.4} size={pillarSize * 1.34} />
-      <FloatingFrame y={pillarHeight / 2 - 2.9} size={pillarSize * 1.62} />
-      <FloatingFrame y={pillarHeight / 2 - 4.5} size={pillarSize * 1.90} />
+      {/* Floating golden diamond wire frames (NO rotation - aligned with pillar) */}
+      <group>
+        <FloatingDiamondFrame y={pillarHeight / 2 - 1.6} size={pillarSize * 0.52} />
+        <FloatingDiamondFrame y={pillarHeight / 2 - 3.2} size={pillarSize * 0.62} />
+        <FloatingDiamondFrame y={pillarHeight / 2 - 4.8} size={pillarSize * 0.72} />
+      </group>
 
-      {/* Small white tile hovering above the top */}
-      <FloatingTile position={[0.2, pillarHeight / 2 + 1.05, 0.1]} />
+      {/* Golden polyhedron/gem hovering above the top */}
+      <FloatingGem position={[0.1, pillarHeight / 2 + 1.3, 0.1]} size={0.85} />
     </group>
   );
 }
@@ -172,25 +259,27 @@ function PillarGroup() {
 function Scene() {
   return (
     <>
-      {/* Lighting: one key + subtle ambient + tiny top lift */}
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[6, 8, 6]} intensity={1.0} color="#ffffff" />
-      <directionalLight position={[0, 10, 0]} intensity={0.25} color="#ffffff" />
+      {/* Lighting: enhanced for natural gem appearance */}
+      <ambientLight intensity={0.4} color="#1a1a2e" />
+      <directionalLight position={[7, 12, 7]} intensity={1.5} color="#FDB517" />
+      <directionalLight position={[0, 15, 0]} intensity={0.5} color="#ffffff" />
+      <directionalLight position={[-5, 8, -5]} intensity={0.7} color="#D68A15" />
+      <directionalLight position={[5, 3, 0]} intensity={0.5} color="#4A7BA7" />
+      {/* Additional rim light for gem */}
+      <directionalLight position={[0, 10, -8]} intensity={0.6} color="#FFF5E1" />
 
-      {/* Auto-fit the whole pillar + tile into the camera frustum */}
-      <Bounds fit clip observe margin={1.25}>
-        <PillarGroup />
-      </Bounds>
+      {/* Show pillar without auto-fitting - allows cropping */}
+      <PillarGroup />
     </>
   );
 }
 
-export function Pillar3D({ scale = 0.9 }: { scale?: number }) {
+export function Pillar3D({ scale = 0.95 }: { scale?: number }) {
   return (
     <div className="w-full h-full" style={{ overflow: 'visible' }}>
       <Canvas
         dpr={[1, 2]}
-        camera={{ position: [7.2, 7.4, 8.0], fov: 38, near: 0.01, far: 500 }}
+        camera={{ position: [7.5, 1, 8.5], fov: 45, near: 0.01, far: 500 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >

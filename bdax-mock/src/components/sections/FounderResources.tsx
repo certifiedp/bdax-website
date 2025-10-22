@@ -1,47 +1,77 @@
+'use client';
+
 import { founderResourcesContent } from '@/data/content';
 import { designConfig } from '@/lib/config';
-import { Pillar3D } from '../ui/pillar-3d';
-import { FloatingCube } from '@/components/ui/floating-cube';
+import { useState } from 'react';
+import Image from 'next/image';
+import { ArrowUpRight } from 'lucide-react';
 
 export function FounderResources() {
-  return (
-    <section className={`${designConfig.colors.background.white} ${designConfig.spacing.section.sm}`}>
-      <div className={designConfig.spacing.container}>
-        <h2 className={`${designConfig.typography.heading.lg} text-center mb-16`}>
-          {founderResourcesContent.title}
-        </h2>
+  const [activeTab, setActiveTab] = useState('talent');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const content = founderResourcesContent.content[activeTab as keyof typeof founderResourcesContent.content];
 
-        <div className="grid md:grid-cols-3 gap-10 md:gap-12 items-center">
-          <div className="text-center md:text-right">
-            <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>
-              {founderResourcesContent.sections[0].text}
-            </p>
+  const handleTabChange = (tabId: string) => {
+    if (tabId !== activeTab) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setActiveTab(tabId);
+        setIsTransitioning(false);
+      }, 200);
+    }
+  };
+
+  return (
+    <section className={`${designConfig.colors.background.main} ${designConfig.spacing.section.lg} relative`}>
+      <div className={`${designConfig.spacing.container} relative`}>
+        {/* Tab Navigation */}
+        <div className="flex flex-wrap gap-2 mb-12">
+          {founderResourcesContent.tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => handleTabChange(tab.id)}
+              className={`px-6 md:px-8 py-3 rounded-t-2xl text-base md:text-lg font-normal transition-all duration-300 hover:scale-105 ${
+                activeTab === tab.id
+                  ? `${designConfig.colors.accent.primary} ${designConfig.colors.text.primary}`
+                  : `${designConfig.colors.background.muted} ${designConfig.colors.text.secondary} hover:bg-[rgba(253,181,23,0.1)]`
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className={`relative transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+          {/* Background Image */}
+          <div className={`relative w-full h-[500px] md:h-[625px] ${designConfig.border.radius.lg} overflow-hidden rounded-tl-none rounded-tr-2xl rounded-br-2xl rounded-bl-2xl`}>
+            <Image
+              src={content.image}
+              alt={content.title}
+              fill
+              className="object-cover transition-transform duration-700 hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 1533px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/20" />
           </div>
 
-          <div className="flex justify-center">
-            <div className="relative w-full max-w-sm aspect-[3/4]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-72 h-96">
-                  <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                    <div className="absolute inset-0">
-                      <Pillar3D scale={2} />
-                    </div>
-                  </div>
-
-                  <FloatingCube className="absolute -top-10 -left-10 w-20 h-20 animate-[float_4s_ease-in-out_infinite]" perspective={300} rotation="rotateX(-18deg) rotateY(-22deg)" depth={10} />
-
-                  <FloatingCube className="absolute top-20 -right-12 w-24 h-24 animate-[float_3.5s_ease-in-out_infinite]" perspective={300} rotation="rotateX(-16deg) rotateY(18deg)" depth={10} animationDelay="0.4s" />
-
-                  {/* removed phased white lines */}
-                </div>
-              </div>
+          {/* Content Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+            <div className="max-w-2xl">
+              <h3 className={`${designConfig.typography.heading.md} ${designConfig.colors.text.primary} mb-6 animate-fadeInUp`}>
+                {content.title}
+              </h3>
+              <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.primary} mb-8 animate-fadeInUp [animation-delay:0.2s]`}>
+                {content.description}
+              </p>
             </div>
           </div>
 
-          <div className="text-center md:text-left">
-            <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>
-              {founderResourcesContent.sections[1].text}
-            </p>
+          {/* Arrow Icon */}
+          <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all cursor-pointer">
+              <ArrowUpRight size={32} className={designConfig.colors.text.primary} />
+            </div>
           </div>
         </div>
       </div>
