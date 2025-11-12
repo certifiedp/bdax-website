@@ -37,12 +37,12 @@ export function Portfolio() {
 
         {/* Infinite Carousel */}
         <AnimatedSection delay={200}>
-          <div className="relative -mx-6 lg:-mx-16 mt-12 overflow-hidden">
-            <div className="flex gap-5 animate-infinite-scroll hover:pause-animation">
+          <div className="relative mt-12 overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <div className="flex gap-5 animate-infinite-scroll hover:pause-animation px-0">
               {infiniteCards.map((card, index) => (
                 <Card
                   key={`${card.id}-${index}`}
-                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-[#111a34] ${designConfig.border.radius.lg} border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
+                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-[#111a34] rounded-none border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
                 >
                   <Image
                     src={card.image}

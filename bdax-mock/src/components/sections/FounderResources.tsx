@@ -25,12 +25,12 @@ export function FounderResources() {
     <section className={`${designConfig.colors.background.main} ${designConfig.spacing.section.lg} relative`}>
       <div className={`${designConfig.spacing.container} relative`}>
         {/* Tab Navigation */}
-        <div className="inline-flex w-fit flex-wrap gap-0 mb-0 rounded-[12px] rounded-b-none overflow-hidden border border-white/10">
+        <div className="flex w-full flex-wrap gap-0 -mb-px overflow-hidden border border-white/10">
           {founderResourcesContent.tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => handleTabChange(tab.id)}
-              className={`px-6 md:px-8 py-4 text-base md:text-lg font-normal transition-all duration-300 first:rounded-l-[12px] last:rounded-r-[12px] border-r border-white/10 ${
+              className={`flex-1 px-6 md:px-8 py-4 text-base md:text-lg font-normal transition-all duration-300 border-r last:border-r-0 border-white/10 text-center ${
                 activeTab === tab.id
                   ? `${designConfig.colors.accent.primary} ${designConfig.colors.text.primary}`
                   : `bg-[rgba(255,255,255,0.06)] ${designConfig.colors.text.primary} text-white/80 hover:bg-[rgba(255,255,255,0.1)]`
@@ -44,7 +44,7 @@ export function FounderResources() {
         {/* Tab Content */}
         <div className={`relative transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           {/* Background Image */}
-          <div className={`relative w-full h-[500px] md:h-[625px] ${designConfig.border.radius.lg} overflow-hidden rounded-2xl`}>
+          <div className={`relative w-full h-[440px] md:h-[560px] ${designConfig.border.radius.lg} overflow-hidden rounded-b-2xl rounded-t-none border border-white/10`}>
             <Image
               src={content.image}
               alt={content.title}
