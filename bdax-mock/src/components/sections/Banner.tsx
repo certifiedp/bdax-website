@@ -8,8 +8,10 @@ import { useState } from 'react';
 export function Banner() {
   const [isVisible, setIsVisible] = useState(true);
 
+  const containerSpacing = isVisible ? 'pt-20 pb-3' : 'pt-24 pb-6';
+
   return (
-    <div className={`flex justify-center items-center pb-3 ${isVisible ? 'pt-20' : 'pt-12'}`}>
+    <div className={`flex justify-center items-center ${containerSpacing}`}>
       {isVisible && (
         <div className={`${designConfig.colors.accent.bannerBg} py-4 px-20 md:px-12 relative w-full flex items-center justify-center`}>
           <p className={`text-[15px] ${designConfig.colors.text.accent} font-medium tracking-wide uppercase`}>
