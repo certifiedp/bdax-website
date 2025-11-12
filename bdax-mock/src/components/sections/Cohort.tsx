@@ -30,7 +30,7 @@ export function Cohort() {
 
         {/* Stats */}
         <AnimatedSection delay={200}>
-          <div className={`grid grid-cols-1 md:grid-cols-3 ${designConfig.spacing.gap.md} opacity-50`}>
+          <div className={`grid grid-cols-1 md:grid-cols-3 ${designConfig.spacing.gap.md} opacity-100`}>
             {cohortContent.stats.map((stat, index) => (
               <div key={index} className="text-center hover:opacity-100 transition-opacity duration-300">
                 <div className={`${designConfig.typography.stats} gradient-text mb-5`}>

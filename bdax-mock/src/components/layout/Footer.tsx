@@ -26,7 +26,7 @@ export function Footer() {
         <div className={designConfig.spacing.container}>
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 mb-12">
             {/* Left - Combined UC Berkeley + BDAX logo image */}
-            <div className="flex items-start">
+            <div className="flex flex-col items-start gap-4">
               <Image
                 src={bdaxWebsiteLogo}
                 alt="UC Berkeley BDAX"
@@ -39,6 +39,9 @@ export function Footer() {
                 {/* Hidden accessible text equivalents */}
                 <span>UC Berkeley BDAX</span>
               </div>
+              <p className={`${designConfig.typography.body.xs} ${designConfig.colors.text.primary} whitespace-pre-line`}>
+                {footerContent.copyright}
+              </p>
             </div>
 
             {/* Right - Navigation and Contact */}

@@ -18,15 +18,15 @@ export function Portfolio() {
           {/* Visit Button */}
           <div className="flex justify-center mb-8">
             <Button 
-              className={`rounded-full px-8 md:px-10 py-3 md:py-4 bg-white text-[#0b1b3f] hover:bg-white/95 hover:scale-105 text-[16px] md:text-[17px] font-medium transition-all shadow-[0_10px_25px_rgba(0,0,0,0.25)] border border-white/20`}
+              className={`px-10 py-5 bg-[#0b1b3f] text-white hover:bg-[#102455] hover:scale-105 text-[15px] font-medium transition-all border border-white/10`}
             >
               {portfolioContent.visitLink.label} <span className="ml-1">→</span>
             </Button>
           </div>
 
           {/* Header */}
-          <div className="text-center mb-6">
-            <h2 className={`${designConfig.typography.heading.xl} ${designConfig.colors.text.primary} mb-4`}>
+          <div className="text-center mb-6 p-4">
+            <h2 className={`${designConfig.typography.heading.lg} ${designConfig.colors.text.primary} mb-4`}>
               {portfolioContent.title}
             </h2>
             <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>
