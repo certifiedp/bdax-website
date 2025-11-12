@@ -11,8 +11,8 @@ export function Banner() {
   if (!isVisible) return null;
 
   return (
-    <div className="flex justify-center items-center pt-20 pb-3 px-4">
-      <div className={`${designConfig.colors.accent.bannerBg} rounded-[26px] py-4 px-8 md:px-12 relative max-w-7xl w-full flex items-center justify-center`}>
+    <div className="flex justify-center items-center pt-20 pb-3 px-10">
+      <div className={`${designConfig.colors.accent.bannerBg} py-4 px-20 md:px-12 relative w-full flex items-center justify-center`}>
         <p className={`text-[15px] ${designConfig.colors.text.accent} font-medium tracking-wide uppercase`}>
           {bannerContent.text}
         </p>
