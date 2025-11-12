@@ -2,29 +2,29 @@
 export const designConfig = {
   colors: {
     background: {
-      main: 'bg-black',
-      dark: 'bg-[#080a19]',
-      darker: 'bg-[#0a0c1b]',
+      main: 'bg-[radial-gradient(circle_at_20%_0%,#1d2850_0%,#0a102b_45%,#050612_100%)]',
+      dark: 'bg-[#05081b]',
+      darker: 'bg-[linear-gradient(180deg,#101a3f_0%,#0c112d_55%,#1b101d_100%)]',
       white: 'bg-white',
       gray: 'bg-gray-100',
       black: 'bg-black',
-      muted: 'bg-[rgba(255,255,255,0.1)]',
+      muted: 'bg-[rgba(255,255,255,0.08)]',
     },
     text: {
       primary: 'text-white',
-      secondary: 'text-[rgba(255,255,255,0.5)]',
-      tertiary: 'text-[rgba(255,255,255,0.64)]',
+      secondary: 'text-[rgba(255,255,255,0.68)]',
+      tertiary: 'text-[rgba(255,255,255,0.45)]',
       black: 'text-black',
-      accent: 'text-[#fdb517]',
+      accent: 'text-[#f6a735]',
     },
     accent: {
-      primary: 'bg-[#d68a15]',
-      gold: 'bg-[#fdb517]',
-      orange: 'bg-[#fe9f07]',
-      bannerBg: 'bg-[rgba(214,138,21,0.29)]',
+      primary: 'bg-[#f39a26]',
+      gold: 'bg-[#f7b548]',
+      orange: 'bg-[#f28423]',
+      bannerBg: 'bg-[rgba(124,80,18,0.68)]',
     },
     border: {
-      light: 'border-[rgba(255,255,255,0.2)]',
+      light: 'border-[rgba(255,255,255,0.25)]',
     },
   },
   spacing: {

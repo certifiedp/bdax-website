@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { footerContent } from '@/data/content';
 import { designConfig } from '@/lib/config';
-import { Logo } from '@/components/ui/logo';
+import bdaxWebsiteLogo from '@/app/bdax-website-logo.png';
 import { Linkedin, Twitter, Instagram, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -24,16 +25,19 @@ export function Footer() {
       <div className={`${designConfig.colors.background.darker} shadow-[0px_-10px_4px_0px_rgba(0,0,0,0.25)] ${designConfig.spacing.section.md} relative`}>
         <div className={designConfig.spacing.container}>
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 mb-12">
-            {/* Left - Logo and Tagline */}
-            <div className="flex items-start gap-6">
-              <Logo size={80} showText={false} />
-              <div className="flex flex-col justify-center">
-                <span className={`${designConfig.colors.text.primary} text-xl font-normal`}>
-                  {footerContent.logo}
-                </span>
-                <span className={`${designConfig.colors.text.primary} text-base font-normal mt-1`}>
-                  {footerContent.tagline}
-                </span>
+            {/* Left - Combined UC Berkeley + BDAX logo image */}
+            <div className="flex items-start">
+              <Image
+                src={bdaxWebsiteLogo}
+                alt="UC Berkeley BDAX"
+                width={260}
+                height={120}
+                className="object-contain w-[220px] md:w-[260px] h-auto"
+                priority
+              />
+              <div className="sr-only">
+                {/* Hidden accessible text equivalents */}
+                <span>UC Berkeley BDAX</span>
               </div>
             </div>
 
@@ -123,13 +127,6 @@ export function Footer() {
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Copyright */}
-      <div className={`${designConfig.spacing.container} py-8`}>
-        <p className={`${designConfig.typography.body.xs} ${designConfig.colors.text.primary} whitespace-pre-line`}>
-          {footerContent.copyright}
-        </p>
       </div>
     </footer>
   );

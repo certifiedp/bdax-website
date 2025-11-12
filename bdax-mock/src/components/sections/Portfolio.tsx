@@ -42,7 +42,7 @@ export function Portfolio() {
               {infiniteCards.map((card, index) => (
                 <Card
                   key={`${card.id}-${index}`}
-                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-gray-800 ${designConfig.border.radius.lg} border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
+                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-[#111a34] ${designConfig.border.radius.lg} border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
                 >
                   <Image
                     src={card.image}

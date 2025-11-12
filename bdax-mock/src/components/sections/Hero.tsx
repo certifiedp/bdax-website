@@ -27,10 +27,10 @@ export function Hero() {
         <div className="flex justify-center items-center order-2 md:order-1 animate-fadeIn">
           <div className="relative w-full max-w-[520px] h-[420px] md:h-[480px] lg:h-[540px]">
             {/* Gradient background box */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#1a1f35] via-[#0f1220] to-[#1e2640] opacity-80"></div>
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#131d46] via-[#0b1030] to-[#291626] opacity-80"></div>
             {/* Outer glow */}
             <div className="absolute inset-0 rounded-2xl" style={{
-              background: 'radial-gradient(circle at 50% 40%, rgba(253, 181, 23, 0.15) 0%, transparent 60%)'
+              background: 'radial-gradient(circle at 55% 35%, rgba(243, 154, 38, 0.3) 0%, transparent 65%)'
             }}></div>
             {/* BDAX Graphic */}
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
@@ -74,7 +74,7 @@ export function Hero() {
             </Button>
             <Button 
               variant="outline"
-              className={`${designConfig.colors.background.white} ${designConfig.colors.text.black} hover:bg-gray-100 hover:scale-105 gap-1 px-15 py-6 font-medium border-0 transition-all`}
+              className={`bg-[#0b1b3f] text-white hover:bg-[#102455] hover:scale-105 gap-1 px-15 py-6 font-medium border border-white/10 transition-all`}
             >
               {heroContent.secondaryCta.label} <span className="text-lg">→</span>
             </Button>
