@@ -28,9 +28,11 @@ export function Header() {
           </nav>
 
           {/* CTA Button */}
-          <Button className={`${designConfig.colors.accent.primary} hover:opacity-90 rounded-[25px] px-7 py-2.5 ${designConfig.colors.text.primary} text-[15px] font-medium transition-all hover:scale-105`}>
-            Apply
-          </Button>
+          <Link href="/apply">
+            <Button className={`${designConfig.colors.accent.primary} hover:opacity-90 px-20 py-5 ${designConfig.colors.text.primary} text-[15px] font-medium transition-all hover:scale-105`}>
+              Apply
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

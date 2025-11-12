@@ -45,20 +45,20 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #000000;
+  --background: #030814;
   --foreground: #ffffff;
   font-family: var(--font-inter), system-ui, sans-serif;
   --card: #0a0c1b;
   --card-foreground: #ffffff;
   --popover: #0a0c1b;
   --popover-foreground: #ffffff;
-  --primary: #d68a15;
+  --primary: #f39a26;
   --primary-foreground: #ffffff;
   --secondary: #080a19;
   --secondary-foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.1);
   --muted-foreground: rgba(255, 255, 255, 0.5);
-  --accent: #fdb517;
+  --accent: #f6a735;
   --accent-foreground: #000000;
   --destructive: oklch(0.577 0.245 27.325);
   --border: rgba(255, 255, 255, 0.2);
@@ -131,7 +131,7 @@
   }
   
   .gradient-text {
-    background: linear-gradient(135deg, #fdb517 0%, #fe9f07 100%);
+    background: linear-gradient(135deg, #f7b548 0%, #f08c23 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

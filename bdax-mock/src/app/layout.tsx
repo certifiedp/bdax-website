@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import bdaxWebsiteLogo from "./bdax-website-logo.png";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,6 +12,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "BDAX - Berkeley Digital Asset Xcelerator",
   description: "Join the Fall 2025 cohort at Berkeley Digital Asset Xcelerator",
+  icons: {
+    icon: bdaxWebsiteLogo.src,
+    shortcut: bdaxWebsiteLogo.src,
+    apple: bdaxWebsiteLogo.src,
+  },
 };
 
 export default function RootLayout({

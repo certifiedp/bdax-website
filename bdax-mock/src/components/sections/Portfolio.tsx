@@ -18,14 +18,14 @@ export function Portfolio() {
           {/* Visit Button */}
           <div className="flex justify-center mb-8">
             <Button 
-              className={`${designConfig.colors.background.white} ${designConfig.colors.text.black} hover:bg-gray-100 hover:scale-105 rounded-[26px] px-7 py-2.5 text-[15px] font-medium transition-all border-0`}
+              className={`px-10 py-5 bg-[#0b1b3f] text-white hover:bg-[#102455] hover:scale-105 text-[15px] font-medium transition-all border border-white/10`}
             >
               {portfolioContent.visitLink.label} <span className="ml-1">→</span>
             </Button>
           </div>
 
           {/* Header */}
-          <div className="text-center mb-6">
+          <div className="text-center mb-6 p-4">
             <h2 className={`${designConfig.typography.heading.lg} ${designConfig.colors.text.primary} mb-4`}>
               {portfolioContent.title}
             </h2>
@@ -37,12 +37,12 @@ export function Portfolio() {
 
         {/* Infinite Carousel */}
         <AnimatedSection delay={200}>
-          <div className="relative -mx-6 lg:-mx-16 mt-12 overflow-hidden">
-            <div className="flex gap-5 animate-infinite-scroll hover:pause-animation">
+          <div className="relative mt-12 overflow-hidden w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <div className="flex gap-5 animate-infinite-scroll hover:pause-animation px-0">
               {infiniteCards.map((card, index) => (
                 <Card
                   key={`${card.id}-${index}`}
-                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-gray-800 ${designConfig.border.radius.lg} border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
+                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-[#111a34] rounded-none border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
                 >
                   <Image
                     src={card.image}

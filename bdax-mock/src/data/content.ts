@@ -17,8 +17,8 @@ export const heroContent = {
 };
 
 export const cohortContent = {
-  title: 'Join our',
-  subtitle: 'Spring 2025 Cohort.',
+  title: 'Join our Spring',
+  subtitle: '2025 Cohort.',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
   stats: [
     { value: '85+', label: 'companies accelerated' },

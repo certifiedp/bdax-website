@@ -2,29 +2,30 @@
 export const designConfig = {
   colors: {
     background: {
-      main: 'bg-black',
-      dark: 'bg-[#080a19]',
-      darker: 'bg-[#0a0c1b]',
+      // Layered navies with clearer depth, fewer pure blacks, pronounced darker spots
+      main: 'bg-[radial-gradient(1200px_900px_at_18%_8%,#1a2b5d_0%,#11224b_45%,transparent_70%),radial-gradient(900px_700px_at_85%_88%,#152a5a_0%,#0c193f_55%,transparent_78%),radial-gradient(1400px_900px_at_50%_120%,rgba(6,12,28,0.9)_0%,rgba(5,10,22,0.82)_60%,transparent_85%),linear-gradient(180deg,#0a1842_0%,#081233_52%,#050a1c_100%)]',
+      dark: 'bg-[#030814]',
+      darker: 'bg-[linear-gradient(180deg,#0c1639_0%,#09122e_55%,#100a14_100%)]',
       white: 'bg-white',
       gray: 'bg-gray-100',
       black: 'bg-black',
-      muted: 'bg-[rgba(255,255,255,0.1)]',
+      muted: 'bg-[rgba(255,255,255,0.08)]',
     },
     text: {
       primary: 'text-white',
-      secondary: 'text-[rgba(255,255,255,0.5)]',
-      tertiary: 'text-[rgba(255,255,255,0.64)]',
+      secondary: 'text-[rgba(255,255,255,0.68)]',
+      tertiary: 'text-[rgba(255,255,255,0.45)]',
       black: 'text-black',
-      accent: 'text-[#fdb517]',
+      accent: 'text-[#f6a735]',
     },
     accent: {
-      primary: 'bg-[#d68a15]',
-      gold: 'bg-[#fdb517]',
-      orange: 'bg-[#fe9f07]',
-      bannerBg: 'bg-[rgba(214,138,21,0.29)]',
+      primary: 'bg-[#f39a26]',
+      gold: 'bg-[#f7b548]',
+      orange: 'bg-[#f28423]',
+      bannerBg: 'bg-[rgba(124,80,18,0.68)]',
     },
     border: {
-      light: 'border-[rgba(255,255,255,0.2)]',
+      light: 'border-[rgba(255,255,255,0.25)]',
     },
   },
   spacing: {
