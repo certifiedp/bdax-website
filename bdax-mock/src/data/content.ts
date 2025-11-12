@@ -1,7 +1,7 @@
 export const navigationLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Our companies', href: '#companies' },
-  { label: 'Demo days', href: '#demo-days' },
+  { label: 'Our Companies', href: '/our-companies' },
+  { label: 'Demo Days', href: '#demo-days' },
 ];
 
 export const bannerContent = {
@@ -95,7 +95,7 @@ export const footerContent = {
       title: 'BDAX',
       links: [
         { label: 'About', href: '#about' },
-        { label: 'Our companies', href: '#companies' },
+        { label: 'Our companies', href: '/our-companies' },
         { label: 'Demo days', href: '#demo-days' },
       ],
     },
