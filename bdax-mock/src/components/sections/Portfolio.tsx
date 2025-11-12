@@ -18,7 +18,7 @@ export function Portfolio() {
           {/* Visit Button */}
           <div className="flex justify-center mb-8">
             <Button 
-              className={`${designConfig.colors.background.white} ${designConfig.colors.text.black} hover:bg-gray-100 hover:scale-105 rounded-[26px] px-7 py-2.5 text-[15px] font-medium transition-all border-0`}
+              className={`rounded-full px-8 md:px-10 py-3 md:py-4 bg-white text-[#0b1b3f] hover:bg-white/95 hover:scale-105 text-[16px] md:text-[17px] font-medium transition-all shadow-[0_10px_25px_rgba(0,0,0,0.25)] border border-white/20`}
             >
               {portfolioContent.visitLink.label} <span className="ml-1">→</span>
             </Button>
@@ -26,7 +26,7 @@ export function Portfolio() {
 
           {/* Header */}
           <div className="text-center mb-6">
-            <h2 className={`${designConfig.typography.heading.lg} ${designConfig.colors.text.primary} mb-4`}>
+            <h2 className={`${designConfig.typography.heading.xl} ${designConfig.colors.text.primary} mb-4`}>
               {portfolioContent.title}
             </h2>
             <p className={`${designConfig.typography.body.base} ${designConfig.colors.text.secondary}`}>

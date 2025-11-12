@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import bdaxGraphic from '@/app/bdax-graphic.png';
 import { designConfig, scrollConfig } from '@/lib/config';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +69,7 @@ export function Hero() {
 
           {/* CTAs */}
           <div className={`flex flex-wrap ${designConfig.spacing.gap.sm} pt-4 animate-fadeInUp opacity-0 [animation-delay:0.8s]`}>
-            <Button 
+            <Button onClick={() => router.push('/apply')}
               className={`${designConfig.colors.accent.primary} hover:opacity-90 hover:scale-105 gap-1 px-15 py-6 font-medium ${designConfig.colors.text.primary} transition-all shadow-lg`}
             >
               {heroContent.primaryCta.label} <span className="text-lg">→</span>

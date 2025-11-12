@@ -2,9 +2,10 @@
 export const designConfig = {
   colors: {
     background: {
-      main: 'bg-[radial-gradient(circle_at_20%_0%,#1d2850_0%,#0a102b_45%,#050612_100%)]',
-      dark: 'bg-[#05081b]',
-      darker: 'bg-[linear-gradient(180deg,#101a3f_0%,#0c112d_55%,#1b101d_100%)]',
+      // Layered navies with clearer depth, fewer pure blacks, pronounced darker spots
+      main: 'bg-[radial-gradient(1200px_900px_at_18%_8%,#1a2b5d_0%,#11224b_45%,transparent_70%),radial-gradient(900px_700px_at_85%_88%,#152a5a_0%,#0c193f_55%,transparent_78%),radial-gradient(1400px_900px_at_50%_120%,rgba(6,12,28,0.9)_0%,rgba(5,10,22,0.82)_60%,transparent_85%),linear-gradient(180deg,#0a1842_0%,#081233_52%,#050a1c_100%)]',
+      dark: 'bg-[#030814]',
+      darker: 'bg-[linear-gradient(180deg,#0c1639_0%,#09122e_55%,#100a14_100%)]',
       white: 'bg-white',
       gray: 'bg-gray-100',
       black: 'bg-black',
