@@ -29,7 +29,7 @@ export function Hero() {
         <div className="flex justify-center items-center order-2 md:order-1 animate-fadeIn">
           <div className="relative w-full max-w-[520px] h-[420px] md:h-[480px] lg:h-[540px]">
           {/* Gradient background box */}
-          <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-[#2d160a] via-[#0a0a0a] to-[#050505] opacity-90"></div>
+          <div className="absolute inset-0 rounded-2xl bg-bdax-hero-box opacity-90"></div>
           {/* Outer glow */}
             <div className="absolute inset-0 rounded-2xl" style={{
               background: 'radial-gradient(circle at 55% 35%, rgba(243, 154, 38, 0.3) 0%, transparent 65%)'
@@ -76,7 +76,7 @@ export function Hero() {
             </Button>
             <Button 
               variant="outline"
-              className={`bg-[#0a0a0a] text-white hover:bg-[#1a1a1a] hover:scale-105 gap-1 px-15 py-6 font-medium border border-white/10 transition-all`}
+              className={`bg-bdax-warm-dark text-white hover:bg-bdax-midnight hover:scale-105 gap-1 px-15 py-6 font-medium border border-white/10 transition-all`}
             >
               {heroContent.secondaryCta.label} <span className="text-lg">→</span>
             </Button>

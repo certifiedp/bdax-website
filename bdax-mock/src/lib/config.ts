@@ -2,30 +2,30 @@
 export const designConfig = {
   colors: {
     background: {
-      // Layered darks with warmer tones and deep blacks
-      main: 'bg-[radial-gradient(1200px_900px_at_18%_8%,#1a1410_0%,#0f0a08_45%,transparent_70%),radial-gradient(900px_700px_at_85%_88%,#15100a_0%,#0c0905_55%,transparent_78%),radial-gradient(1400px_900px_at_50%_120%,rgba(10,8,6,0.9)_0%,rgba(5,4,3,0.82)_60%,transparent_85%),linear-gradient(180deg,#0a0806_0%,#050403_52%,#000000_100%)]',
-      dark: 'bg-[#050505]',
-      darker: 'bg-[linear-gradient(180deg,#0c0a08_0%,#090705_55%,#000000_100%)]',
+      // Layered darks with warmer tones, deep blacks, and a subtle midnight blue hint
+      main: 'bg-bdax-gradient-main',
+      dark: 'bg-bdax-midnight',
+      darker: 'bg-bdax-gradient-darker',
       white: 'bg-white',
       gray: 'bg-gray-100',
       black: 'bg-black',
-      muted: 'bg-[rgba(255,255,255,0.08)]',
+      muted: 'bg-white/10',
     },
     text: {
       primary: 'text-white',
-      secondary: 'text-[rgba(255,255,255,0.68)]',
-      tertiary: 'text-[rgba(255,255,255,0.45)]',
+      secondary: 'text-white/70',
+      tertiary: 'text-white/45',
       black: 'text-black',
-      accent: 'text-[#f6a735]',
+      accent: 'text-bdax-orange',
     },
     accent: {
-      primary: 'bg-[#f39a26]',
-      gold: 'bg-[#f7b548]',
-      orange: 'bg-[#f28423]',
-      bannerBg: 'bg-[rgba(124,80,18,0.68)]',
+      primary: 'bg-bdax-orange',
+      gold: 'bg-bdax-gold',
+      orange: 'bg-bdax-orange',
+      bannerBg: 'bg-[rgba(124,80,18,0.68)]', // Consider moving to CSS if reused
     },
     border: {
-      light: 'border-[rgba(255,255,255,0.25)]',
+      light: 'border-white/25',
     },
   },
   spacing: {

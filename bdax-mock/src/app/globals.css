@@ -15,7 +15,7 @@
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
+  --color-sidebar-: var(--sidebar);
   --color-chart-5: var(--chart-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
@@ -41,12 +41,31 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Custom BDAX Colors */
+  --color-bdax-dark: var(--bdax-dark);
+  --color-bdax-midnight: var(--bdax-midnight);
+  --color-bdax-card: var(--bdax-card);
+  --color-bdax-gold: var(--bdax-gold);
+  --color-bdax-orange: var(--bdax-orange);
+  --color-bdax-navy-subtle: var(--bdax-navy-subtle);
+  --color-bdax-warm-dark: var(--bdax-warm-dark);
 }
 
 :root {
   --radius: 0.625rem;
-  --background: #050505;
+  --background: #020305;
   --foreground: #ffffff;
+  
+  /* BDAX Tokens */
+  --bdax-dark: #010205;        /* Deepest black/blue */
+  --bdax-midnight: #020305;    /* Main background */
+  --bdax-card: #0a0c1b;        /* Card background */
+  --bdax-gold: #f7b548;        /* Gold accent */
+  --bdax-orange: #f39a26;      /* Orange accent */
+  --bdax-navy-subtle: #07080d; /* Subtle blue tint */
+  --bdax-warm-dark: #0a0806;   /* Warm dark for gradients */
+
   font-family: var(--font-inter), system-ui, sans-serif;
   --card: #0a0c1b;
   --card-foreground: #ffffff;
@@ -54,7 +73,7 @@
   --popover-foreground: #ffffff;
   --primary: #f39a26;
   --primary-foreground: #ffffff;
-  --secondary: #0a0a0a;
+  --secondary: #07080d;
   --secondary-foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.1);
   --muted-foreground: rgba(255, 255, 255, 0.5);
@@ -196,9 +215,11 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
     }
   }
   
@@ -233,5 +254,29 @@
   
   .pause-animation:hover {
     animation-play-state: paused;
+  }
+
+  /* Custom Gradients */
+  .bg-bdax-gradient-main {
+    background: 
+      radial-gradient(1200px 900px at 18% 8%, #1a1410 0%, #0f0a08 45%, transparent 70%),
+      radial-gradient(900px 700px at 85% 88%, #15100a 0%, #0c0905 55%, transparent 78%),
+      radial-gradient(1400px 900px at 50% 120%, rgba(10,8,6,0.9) 0%, rgba(5,4,3,0.82) 60%, transparent 85%),
+      linear-gradient(180deg, #0a0806 0%, #07080d 52%, #010205 100%);
+  }
+  
+  .bg-bdax-gradient-darker {
+    background: linear-gradient(180deg, #0c0a08 0%, #08090e 55%, #010205 100%);
+  }
+
+  .bg-bdax-hero-box {
+    background: linear-gradient(to bottom right, #2d160a, #0b0d15, #020408);
+  }
+
+  .bg-bdax-companies-hero {
+    background: 
+      radial-gradient(1200px 800px at 15% 0%, rgba(247,181,72,0.18) 0%, transparent 60%),
+      radial-gradient(900px 700px at 90% 100%, rgba(243,154,38,0.16) 0%, transparent 70%),
+      linear-gradient(180deg, #1a1410 0%, #070910 55%, #010205 100%);
   }
 }

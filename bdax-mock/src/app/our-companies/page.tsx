@@ -80,7 +80,7 @@ export default function OurCompaniesPage() {
         {/* Hero banner */}
         <section className="relative h-screen min-h-screen">
           {/* Rich background wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(1200px_800px_at_15%_0%,rgba(247,181,72,0.18)_0%,transparent_60%),radial-gradient(900px_700px_at_90%_100%,rgba(243,154,38,0.16)_0%,transparent_70%),linear-gradient(180deg,#1a1410_0%,#0f0a08_55%,#050505_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(1200px_800px_at_15%_0%,rgba(247,181,72,0.18)_0%,transparent_60%),radial-gradient(900px_700px_at_90%_100%,rgba(243,154,38,0.16)_0%,transparent_70%),linear-gradient(180deg,#1a1410_0%,#070910_55%,#010205_100%)]" />
           {/* Foreground content */}
           <div className={`${designConfig.spacing.container} relative h-full`}>
             <div className="absolute bottom-10 left-0 right-0">
@@ -96,7 +96,7 @@ export default function OurCompaniesPage() {
             </div>
           </div>
           {/* Seamless fade into page background */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 md:h-16 bg-gradient-to-b from-transparent via-[#0f0a08]/50 to-[#050505]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 md:h-16 bg-gradient-to-b from-transparent via-[#070910]/50 to-[#010205]" />
         </section>
 
         {/* Grid */}
