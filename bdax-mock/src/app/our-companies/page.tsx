@@ -80,7 +80,7 @@ export default function OurCompaniesPage() {
         {/* Hero banner */}
         <section className="relative h-screen min-h-screen">
           {/* Rich background wash */}
-          <div className="absolute inset-0 bg-[radial-gradient(1200px_800px_at_15%_0%,rgba(247,181,72,0.18)_0%,transparent_60%),radial-gradient(900px_700px_at_90%_100%,rgba(243,154,38,0.16)_0%,transparent_70%),linear-gradient(180deg,#1a1410_0%,#070910_55%,#010205_100%)]" />
+          <div className="absolute inset-0 bg-bdax-companies-hero" />
           {/* Foreground content */}
           <div className={`${designConfig.spacing.container} relative h-full`}>
             <div className="absolute bottom-10 left-0 right-0">
@@ -96,7 +96,7 @@ export default function OurCompaniesPage() {
             </div>
           </div>
           {/* Seamless fade into page background */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 md:h-16 bg-gradient-to-b from-transparent via-[#070910]/50 to-[#010205]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 md:h-16 bg-linear-to-b from-transparent via-bdax-navy-subtle/50 to-bdax-dark" />
         </section>
 
         {/* Grid */}
@@ -108,7 +108,7 @@ export default function OurCompaniesPage() {
                 className="relative overflow-hidden border-0 bg-transparent"
               >
                 {/* Image */}
-                <div className="relative w-full aspect-[16/11] rounded-2xl overflow-hidden">
+                <div className="relative w-full aspect-16/11 rounded-2xl overflow-hidden">
                   <Image
                     src={company.image}
                     alt={company.name}
@@ -117,7 +117,7 @@ export default function OurCompaniesPage() {
                     sizes="(max-width: 768px) 100vw, 600px"
                   />
                   {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/10 to-transparent" />
 
                   {/* Text + CTA */}
                   <div className="absolute left-5 right-5 bottom-5">
@@ -130,7 +130,7 @@ export default function OurCompaniesPage() {
 
                     <div className="flex justify-end">
                       <Link href={company.href}>
-                        <Button className="px-6 py-2 rounded-full bg-white/90 text-[#0a0a0a] hover:bg-white">
+                        <Button className="px-6 py-2 rounded-full bg-white/90 text-bdax-warm-dark hover:bg-white">
                           View
                         </Button>
                       </Link>
