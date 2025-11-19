@@ -2,10 +2,10 @@
 export const designConfig = {
   colors: {
     background: {
-      // Layered navies with clearer depth, fewer pure blacks, pronounced darker spots
-      main: 'bg-[radial-gradient(1200px_900px_at_18%_8%,#1a2b5d_0%,#11224b_45%,transparent_70%),radial-gradient(900px_700px_at_85%_88%,#152a5a_0%,#0c193f_55%,transparent_78%),radial-gradient(1400px_900px_at_50%_120%,rgba(6,12,28,0.9)_0%,rgba(5,10,22,0.82)_60%,transparent_85%),linear-gradient(180deg,#0a1842_0%,#081233_52%,#050a1c_100%)]',
-      dark: 'bg-[#030814]',
-      darker: 'bg-[linear-gradient(180deg,#0c1639_0%,#09122e_55%,#100a14_100%)]',
+      // Layered darks with warmer tones and deep blacks
+      main: 'bg-[radial-gradient(1200px_900px_at_18%_8%,#1a1410_0%,#0f0a08_45%,transparent_70%),radial-gradient(900px_700px_at_85%_88%,#15100a_0%,#0c0905_55%,transparent_78%),radial-gradient(1400px_900px_at_50%_120%,rgba(10,8,6,0.9)_0%,rgba(5,4,3,0.82)_60%,transparent_85%),linear-gradient(180deg,#0a0806_0%,#050403_52%,#000000_100%)]',
+      dark: 'bg-[#050505]',
+      darker: 'bg-[linear-gradient(180deg,#0c0a08_0%,#090705_55%,#000000_100%)]',
       white: 'bg-white',
       gray: 'bg-gray-100',
       black: 'bg-black',

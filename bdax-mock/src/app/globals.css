@@ -45,7 +45,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #030814;
+  --background: #050505;
   --foreground: #ffffff;
   font-family: var(--font-inter), system-ui, sans-serif;
   --card: #0a0c1b;
@@ -54,7 +54,7 @@
   --popover-foreground: #ffffff;
   --primary: #f39a26;
   --primary-foreground: #ffffff;
-  --secondary: #080a19;
+  --secondary: #0a0a0a;
   --secondary-foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.1);
   --muted-foreground: rgba(255, 255, 255, 0.5);

@@ -18,7 +18,7 @@ export function Portfolio() {
           {/* Visit Button */}
           <div className="flex justify-center mb-8">
             <Button 
-              className={`px-10 py-5 bg-[#0b1b3f] text-white hover:bg-[#102455] hover:scale-105 text-[15px] font-medium transition-all border border-white/10`}
+              className={`px-10 py-5 bg-[#0a0a0a] text-white hover:bg-[#1a1a1a] hover:scale-105 text-[15px] font-medium transition-all border border-white/10`}
             >
               {portfolioContent.visitLink.label} <span className="ml-1">→</span>
             </Button>
@@ -42,7 +42,7 @@ export function Portfolio() {
               {infiniteCards.map((card, index) => (
                 <Card
                   key={`${card.id}-${index}`}
-                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-[3/4] bg-[#111a34] rounded-none border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
+                  className={`flex-none w-[280px] md:w-[350px] lg:w-[400px] aspect-3/4 bg-[#0a0c1b] rounded-none border-0 overflow-hidden relative opacity-70 hover:opacity-100 transition-opacity duration-300`}
                 >
                   <Image
                     src={card.image}
