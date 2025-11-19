@@ -33,7 +33,7 @@ export function FounderResources() {
               className={`flex-1 px-6 md:px-8 py-4 text-base md:text-lg font-normal transition-all duration-300 border-r last:border-r-0 border-white/10 text-center ${
                 activeTab === tab.id
                   ? `${designConfig.colors.accent.primary} ${designConfig.colors.text.primary}`
-                  : `bg-[rgba(255,255,255,0.06)] ${designConfig.colors.text.primary} text-white/80 hover:bg-[rgba(255,255,255,0.1)]`
+                  : `bg-white/5 ${designConfig.colors.text.primary} text-white/80 hover:bg-white/10`
               }`}
             >
               {tab.label}
@@ -52,7 +52,7 @@ export function FounderResources() {
               className="object-cover transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 768px) 100vw, 1533px"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/25 to-black/25" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/25 to-black/25" />
           </div>
 
           {/* Content Overlay */}

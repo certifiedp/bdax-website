@@ -279,4 +279,8 @@
       radial-gradient(900px 700px at 90% 100%, rgba(243,154,38,0.16) 0%, transparent 70%),
       linear-gradient(180deg, #1a1410 0%, #070910 55%, #010205 100%);
   }
+
+  .bg-bdax-banner {
+    background-color: rgba(124, 80, 18, 0.68);
+  }
 }

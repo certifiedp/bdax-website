@@ -22,7 +22,7 @@ export const designConfig = {
       primary: 'bg-bdax-orange',
       gold: 'bg-bdax-gold',
       orange: 'bg-bdax-orange',
-      bannerBg: 'bg-[rgba(124,80,18,0.68)]', // Consider moving to CSS if reused
+      bannerBg: 'bg-bdax-banner',
     },
     border: {
       light: 'border-white/25',
